@@ -60,13 +60,8 @@ def unet_model():
     c21 = layers.Conv2D(64, activation='relu', kernel_size=3)(c20)
 
     # This is based on our dataset. The output channels are 3, think of it as each pixel will be classified
-    # into three classes
-    outputs = layers.Conv2D(3, kernel_size=1)(c21)
+    # into three classes, but I have written 4 here, as I do padding with 0, so we end up have four classes.
+    outputs = layers.Conv2D(4, kernel_size=1)(c21)
 
-    model = tf.keras.Model(inputs=inputs, outputs=outputs, name="u-net model")
-    model.build(input_shape=(None, 3, 572, 572))
-    model.summary()
+    model = tf.keras.Model(inputs=inputs, outputs=outputs, name="u-netmodel")
     return model
-
-
-unet_model()
